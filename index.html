@@ -1,472 +1,597 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-	<script>(function(s){s.dataset.zone='10413969',s.src='https://llvpn.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-<meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Vudol - Nonton Video Dapat Uang</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Live Video Chat - Connect with Girls Worldwide</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 
-  <style>
-    :root{
-      --bg:#ffffff; --text:#0f172a; --muted:#64748b; --line:#e2e8f0; --brand:#111827;
-      --btn:#111827; --btnText:#ffffff; --btnHover:#000000; --card:#f8fafc;
-    }
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    /* ===== RESET & BASE ===== */
-    *,*::before,*::after{ box-sizing:border-box }
-    html{ -webkit-text-size-adjust:100% }
-    html,body{ height:100%; margin:0 }
-    body{
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;
-      color:var(--text); background:var(--bg); line-height:1.45;
-      overflow-x:hidden;
-    }
-    img,video,canvas,svg,iframe{ max-width:100%; height:auto; display:block }
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    /* ===== APP BAR ===== */
-    .appbar{
-      position:sticky; top:0; z-index:20; background:rgba(255,255,255,.85);
-      backdrop-filter:saturate(180%) blur(8px); border-bottom:1px solid var(--line);
-    }
-    .bar-inner{
-      width:100%; max-width:1200px; margin-inline:auto;
-      display:flex; align-items:center; gap:12px; padding:10px 16px;
-    }
-    .brand{ display:flex; align-items:center; gap:8px; font-weight:800; letter-spacing:.2px }
-    .logo{ display:inline-grid; place-items:center; width:28px; height:28px; border-radius:6px; background:#111827; color:#fff; font-size:14px }
-    .spacer{ flex:1 }
-    .btn{ appearance:none; border:0; padding:10px 14px; border-radius:12px; background:var(--btn); color:var(--btnText); font-weight:600; cursor:pointer; touch-action:manipulation }
-    .btn:hover{ background:var(--btnHover) }
+body {
+  font-family: 'Inter', sans-serif;
+  background: #0a0a0a;
+  color: #fff;
+  line-height: 1.5;
+}
 
-    /* ===== BANNER INFO ===== */
-    .banner{
-      width:100%; max-width:1200px; margin:10px auto 0; padding:8px 16px;
-      color:var(--muted); font-size:14px;
-    }
+/* ===== HEADER ===== */
+.header {
+  background: rgba(10, 10, 10, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 12px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
 
-    /* ===== LAYOUT ===== */
-    .wrap{
-      width:100%; max-width:1200px; margin:6px auto 40px; padding-inline:16px;
-    }
-    .player-shell{ display:grid; place-items:center; margin-top:20px }
+.header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
 
-    .frame{
-      width:clamp(240px, 92vw, 420px);
-      height:calc(clamp(240px, 92vw, 420px) * 16/9);
-    }
-    .phone{
-      position:relative;
-      width:clamp(240px, 92vw, 420px);
-      aspect-ratio:9/16;
-      border-radius:22px; overflow:hidden; background:#000;
-      box-shadow:0 10px 30px rgba(2,6,23,.15), 0 3px 10px rgba(2,6,23,.08);
-    }
-    .phone video,.phone img{ width:100%; height:100%; object-fit:cover }
+.logo {
+  font-size: 22px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
 
-    .meta{
-      width:100%; max-width:760px; margin:22px auto 0; padding:0 6px;
-      text-align:center; color:var(--muted); font-size:13px;
-    }
+.logo i {
+  background: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
+  color: #ff6b6b;
+}
 
-    .ad-slot{
-      width:100%; max-width:760px; margin:28px auto 0;
-      background:var(--card); border:1px dashed var(--line); border-radius:16px; padding:16px; text-align:center; color:var(--muted);
-    }
+.nav-links {
+  display: flex;
+  gap: 24px;
+}
 
-    @media (min-width:1024px){
-      .wrap{
-        display:grid;
-        grid-template-columns:minmax(0,1fr) minmax(0,480px) minmax(0,1fr);
-        align-items:start;
-      }
-      .player-shell{ grid-column:2 }
-    }
+.nav-links a {
+  color: #ccc;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
 
-    /* ===== POPUP EARN MONEY ===== */
-    #earn-overlay{
-      position:fixed; inset:0; background:linear-gradient(135deg, rgba(0,0,0,0.85), rgba(0,0,0,0.75));
-      backdrop-filter:blur(8px); z-index:9998; visibility:hidden; opacity:0;
-      transition:opacity 0.3s ease, visibility 0.3s ease;
-    }
-    #earn-modal{
-      position:fixed; inset:0; z-index:9999;
-      display:flex; align-items:center; justify-content:center; padding:16px;
-      visibility:hidden;
-    }
-    .earn-card{
-      width:min(92vw, 500px);
-      background:linear-gradient(145deg, #1a1a2e, #16213e);
-      color:#fff;
-      border-radius:28px;
-      box-shadow:0 30px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1);
-      padding:0;
-      position:relative;
-      transform:scale(0.9);
-      transition:transform 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
-      overflow:hidden;
-    }
-    .earn-card.active{
-      transform:scale(1);
-    }
-    .earn-header{
-      background:linear-gradient(135deg, #fbbf24, #f59e0b);
-      padding:24px 20px 16px;
-      text-align:center;
-    }
-    .earn-header h2{
-      margin:0 0 8px;
-      font-size:28px;
-      font-weight:800;
-      color:#1e293b;
-    }
-    .earn-header p{
-      margin:0;
-      font-size:14px;
-      color:#422006;
-      font-weight:600;
-    }
-    .earn-badge{
-      display:inline-block;
-      background:#fff;
-      padding:8px 16px;
-      border-radius:40px;
-      margin-top:12px;
-      font-weight:800;
-      font-size:20px;
-      color:#f59e0b;
-      box-shadow:0 4px 12px rgba(0,0,0,0.1);
-    }
-    .earn-badge span{
-      font-size:28px;
-      color:#ea580c;
-    }
-    .earn-body{
-      padding:24px 20px;
-    }
-    .earn-rate{
-      background:rgba(255,255,255,0.08);
-      border-radius:20px;
-      padding:16px;
-      text-align:center;
-      margin-bottom:20px;
-      border:1px solid rgba(255,255,255,0.1);
-    }
-    .earn-rate .amount{
-      font-size:36px;
-      font-weight:800;
-      color:#fbbf24;
-    }
-    .earn-rate .unit{
-      font-size:14px;
-      color:#94a3b8;
-    }
-    .simulation{
-      background:rgba(0,0,0,0.3);
-      border-radius:16px;
-      padding:12px;
-      margin-bottom:20px;
-      font-size:13px;
-    }
-    .simulation-row{
-      display:flex;
-      justify-content:space-between;
-      padding:8px 0;
-      border-bottom:1px solid rgba(255,255,255,0.05);
-    }
-    .simulation-row:last-child{
-      border-bottom:none;
-    }
-    .feature-list{
-      margin-bottom:20px;
-    }
-    .feature-item{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      margin-bottom:12px;
-      font-size:14px;
-    }
-    .feature-icon{
-      width:24px;
-      height:24px;
-      background:rgba(251,191,36,0.2);
-      border-radius:50%;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      color:#fbbf24;
-      font-size:14px;
-    }
-    .btn-earn{
-      width:100%;
-      background:linear-gradient(135deg, #fbbf24, #f59e0b);
-      border:none;
-      padding:16px;
-      border-radius:16px;
-      font-size:18px;
-      font-weight:800;
-      color:#1e293b;
-      cursor:pointer;
-      transition:transform 0.2s, box-shadow 0.2s;
-    }
-    .btn-earn:hover{
-      transform:translateY(-2px);
-      box-shadow:0 8px 20px rgba(251,191,36,0.3);
-    }
-    .close-earn{
-      position:absolute;
-      top:12px;
-      right:12px;
-      width:32px;
-      height:32px;
-      background:rgba(0,0,0,0.5);
-      border-radius:50%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      cursor:pointer;
-      font-size:20px;
-      color:#fff;
-      transition:background 0.2s;
-      z-index:10;
-    }
-    .close-earn:hover{
-      background:rgba(0,0,0,0.7);
-    }
-    .small-note{
-      font-size:11px;
-      color:#64748b;
-      text-align:center;
-      margin-top:12px;
-    }
-  </style>
+.nav-links a:hover {
+  color: #ff6b6b;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 8px 18px;
+  border-radius: 40px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-outline:hover {
+  border-color: #ff6b6b;
+  color: #ff6b6b;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+  border: none;
+  padding: 8px 20px;
+  border-radius: 40px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(255,107,107,0.3);
+}
+
+/* ===== HERO SECTION ===== */
+.hero {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 32px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #fff, #ff8e53);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 12px;
+}
+
+.hero p {
+  color: #aaa;
+  font-size: 16px;
+  margin-bottom: 24px;
+}
+
+.badges {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  background: rgba(255,107,107,0.15);
+  border: 1px solid rgba(255,107,107,0.3);
+  padding: 6px 16px;
+  border-radius: 40px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.badge i {
+  margin-right: 6px;
+  color: #ff6b6b;
+}
+
+.badge-new {
+  background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+  border: none;
+  color: #fff;
+}
+
+/* ===== LIVE USERS GRID ===== */
+.section-title {
+  max-width: 1200px;
+  margin: 30px auto 16px;
+  padding: 0 20px;
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.live-dot {
+  width: 10px;
+  height: 10px;
+  background: #ff4444;
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0.3; transform: scale(1.2); }
+}
+
+.users-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.user-card {
+  background: #111;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.user-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  border-color: rgba(255,107,107,0.3);
+}
+
+.user-avatar {
+  position: relative;
+  aspect-ratio: 1/1;
+  background: linear-gradient(145deg, #1a1a2e, #16213e);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+}
+
+.live-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #ff4444;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.live-count {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(0,0,0,0.7);
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.user-info {
+  padding: 12px;
+  text-align: center;
+}
+
+.user-name {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.user-status {
+  font-size: 11px;
+  color: #22c55e;
+  margin-top: 4px;
+}
+
+/* ===== SHOW MORE BUTTON ===== */
+.show-more {
+  text-align: center;
+  margin: 30px auto;
+}
+
+.btn-show-more {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 12px 32px;
+  border-radius: 40px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-show-more:hover {
+  border-color: #ff6b6b;
+  color: #ff6b6b;
+}
+
+/* ===== CTA SECTION ===== */
+.cta-section {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 40px 20px;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(255,107,107,0.1), rgba(255,142,83,0.05));
+  border-radius: 32px;
+  border: 1px solid rgba(255,107,107,0.2);
+}
+
+.cta-section h2 {
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+
+.cta-section p {
+  color: #aaa;
+  margin-bottom: 24px;
+}
+
+.btn-large {
+  background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+  border: none;
+  padding: 14px 40px;
+  border-radius: 50px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.btn-large:hover {
+  transform: scale(1.02);
+}
+
+/* ===== ONLINE USERS HORIZONTAL ===== */
+.online-section {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.online-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.online-scroll {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+.online-scroll::-webkit-scrollbar {
+  height: 4px;
+}
+
+.online-scroll::-webkit-scrollbar-track {
+  background: #222;
+  border-radius: 10px;
+}
+
+.online-scroll::-webkit-scrollbar-thumb {
+  background: #ff6b6b;
+  border-radius: 10px;
+}
+
+.online-item {
+  flex-shrink: 0;
+  text-align: center;
+  cursor: pointer;
+}
+
+.online-avatar {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(145deg, #ff6b6b, #ff8e53);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.online-dot {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 14px;
+  height: 14px;
+  background: #22c55e;
+  border-radius: 50%;
+  border: 2px solid #0a0a0a;
+}
+
+.online-name {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.online-status {
+  font-size: 10px;
+  color: #22c55e;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  text-align: center;
+  padding: 30px 20px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  margin-top: 40px;
+  color: #666;
+  font-size: 12px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 24px;
+  }
+  
+  .users-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px;
+  }
+  
+  .header-inner {
+    flex-direction: column;
+  }
+  
+  .nav-links {
+    order: 3;
+    justify-content: center;
+  }
+}
+</style>
 </head>
-
 <body>
-  <!-- Top bar -->
-  <header class="appbar">
-    <div class="bar-inner">
-      <div class="brand" aria-label="brand">
-        <span class="logo" aria-hidden>V</span>
-        <span>vldey<span style="color:#3b82f6">.co</span></span>
-      </div>
-      <div class="spacer"></div>
-      <button class="btn">Upload</button>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">
+      <i class="fas fa-video"></i> Live<span style="color:#ff6b6b">Chat</span>
     </div>
-  </header>
-
-  <div class="banner">Advertise</div>
-	
-  <!-- ===== MAIN CONTENT ===== -->
-  <main class="wrap">
-    <section class="player-shell">
-      <div class="phone">
-        <video id="video" playsinline controls poster="">
-          <source src="https://cdn2.slicedrive.com/wFpWOFK71.mp4" type="video/mp4" />
-          Browser kamu tidak mendukung pemutar video HTML5.
-        </video>
-      </div>
-      <div class="meta">0:00 / 3:57 • Putar untuk memulai</div>
-      <div class="ad-slot">Slot Iklan 728×90 (contoh)</div>
-    </section>
-  </main>
-	  
-  <script async src="https://js.wpadmngr.com/static/adManager.js" data-admpid="429069"></script>
-
-  <script>
-    // Update teks durasi kecil
-    const v = document.getElementById('video');
-    const meta = document.querySelector('.meta');
-    function fmt(t){ const m = Math.floor(t/60); const s = Math.floor(t%60).toString().padStart(2,'0'); return `${m}:${s}`; }
-    v.addEventListener('loadedmetadata', ()=>{ meta.textContent = `0:00 / ${fmt(v.duration)}`; });
-    v.addEventListener('timeupdate',     ()=>{ meta.textContent = `${fmt(v.currentTime)} / ${fmt(v.duration)}`; });
-  </script>
-
-  <!-- ========== POPUP EARN MONEY (BARU) ========== -->
-  <div id="earn-overlay"></div>
-  <div id="earn-modal">
-    <div class="earn-card">
-      <div class="close-earn" id="closeEarnPopup">✕</div>
-      <div class="earn-header">
-        <h2>💰 HASILKAN UANG!</h2>
-        <p>Sambil nonton video favoritmu</p>
-        <div class="earn-badge">
-          Rp<span>100</span> / menit
-        </div>
-      </div>
-      <div class="earn-body">
-        <div class="earn-rate">
-          <div class="amount">Rp6.000</div>
-          <div class="unit">per jam nonton video</div>
-        </div>
-        
-        <div class="simulation">
-          <div class="simulation-row">
-            <span>📺 30 menit nonton</span>
-            <span style="color:#fbbf24; font-weight:700;">Rp3.000</span>
-          </div>
-          <div class="simulation-row">
-            <span>⏰ 2 jam nonton</span>
-            <span style="color:#fbbf24; font-weight:700;">Rp12.000</span>
-          </div>
-          <div class="simulation-row">
-            <span>🚀 5 jam nonton</span>
-            <span style="color:#fbbf24; font-weight:700;">Rp30.000</span>
-          </div>
-        </div>
-
-        <div class="feature-list">
-          <div class="feature-item">
-            <span class="feature-icon">✓</span>
-            <span>Daftar gratis 5 detik</span>
-          </div>
-          <div class="feature-item">
-            <span class="feature-icon">✓</span>
-            <span>Semakin lama nonton, semakin besar saldo</span>
-          </div>
-          <div class="feature-item">
-            <span class="feature-icon">✓</span>
-            <span>Withdraw ke OVO/Dana/Gopay minimal Rp25.000</span>
-          </div>
-        </div>
-
-        <button class="btn-earn" id="earnNowBtn">🚀 DAFTAR SEKARANG & MULAI NONTON</button>
-        <div class="small-note">*Bonus pendaftaran: 10 menit pertama GRATIS!</div>
-      </div>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">Live Cams</a>
+      <a href="#">Random Chat</a>
+      <a href="#">Premium</a>
+    </div>
+    <div class="auth-buttons">
+      <button class="btn-outline" id="loginBtn">Login</button>
+      <button class="btn-primary" id="signupBtn">Sign Up</button>
     </div>
   </div>
+</header>
 
-  <!-- ===== Histats ===== -->
-  <script type="text/javascript">var _Hasync= _Hasync|| [];
-_Hasync.push(['Histats.start', '1,5000398,4,0,0,0,00010000']);
-_Hasync.push(['Histats.fasi', '1']);
-_Hasync.push(['Histats.track_hits', '']);
-(function() {
-var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
-hs.src = ('//s10.histats.com/js15_as.js');
-(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
-})();</script>
-<noscript><a href="/" target="_blank"><img src="//sstatic1.histats.com/0.gif?5000398&101" alt="" border="0"></a></noscript>
+<!-- HERO -->
+<section class="hero">
+  <h1>1-on-1 Video Chat with Girls & Live Cam Shows</h1>
+  <p>Connect instantly with real women worldwide in private 1v1 random video chat</p>
+  <div class="badges">
+    <span class="badge"><i class="fas fa-video"></i> Live Cam Chat</span>
+    <span class="badge badge-new"><i class="fas fa-star"></i> NEW</span>
+  </div>
+</section>
 
-  <!-- ===== Script popup ===== -->
-  <script>
-    // ================== KONFIGURASI POPUP ==================
-    const DAFTAR_URL = "https://crn77.com/4/9852556"; // Ganti dengan link pendaftaran asli
-    const POPUP_DELAY_MS = 5000; // muncul setelah 5 detik
-    const REMEMBER_TTL_MIN = 30; // tidak muncul lagi selama 30 menit setelah ditutup
-    
-    // ================== ELEMEN ==================
-    const overlay = document.getElementById('earn-overlay');
-    const modal = document.getElementById('earn-modal');
-    const earnCard = document.querySelector('.earn-card');
-    const closeBtn = document.getElementById('closeEarnPopup');
-    const daftarBtn = document.getElementById('earnNowBtn');
-    
-    // ================== FUNGSI ==================
-    function lockScroll(lock) {
-      if (lock) {
-        document.documentElement.style.overflow = 'hidden';
-        document.body.style.overflow = 'hidden';
-      } else {
-        document.documentElement.style.overflow = '';
-        document.body.style.overflow = '';
-      }
-    }
-    
-    function showPopup() {
-      if (shouldSkip()) return;
-      
-      overlay.style.visibility = 'visible';
-      modal.style.visibility = 'visible';
-      setTimeout(() => {
-        overlay.style.opacity = '1';
-        earnCard.classList.add('active');
-      }, 10);
-      lockScroll(true);
-    }
-    
-    function hidePopup() {
-      overlay.style.opacity = '0';
-      earnCard.classList.remove('active');
-      setTimeout(() => {
-        overlay.style.visibility = 'hidden';
-        modal.style.visibility = 'hidden';
-        lockScroll(false);
-      }, 300);
-      rememberClose();
-    }
-    
-    function rememberClose() {
-      try {
-        localStorage.setItem('earn_popup_closed', Date.now().toString());
-      } catch(e) {}
-    }
-    
-    function shouldSkip() {
-      try {
-        const closedTime = localStorage.getItem('earn_popup_closed');
-        if (!closedTime) return false;
-        const diff = Date.now() - parseInt(closedTime);
-        return diff < REMEMBER_TTL_MIN * 60 * 1000;
-      } catch(e) {
-        return false;
-      }
-    }
-    
-    function openRegistration() {
-      // Buka tab baru ke link pendaftaran
-      window.open(DAFTAR_URL, '_blank', 'noopener,noreferrer');
-      hidePopup();
-    }
-    
-    // ================== EVENT LISTENER ==================
-    closeBtn.addEventListener('click', hidePopup);
-    daftarBtn.addEventListener('click', openRegistration);
-    
-    // Klik overlay untuk menutup
-    overlay.addEventListener('click', hidePopup);
-    
-    // ESC key untuk menutup
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && overlay.style.visibility === 'visible') {
-        hidePopup();
-      }
-    });
-    
-    // ================== TAMPILKAN POPUP ==================
-    window.addEventListener('load', () => {
-      setTimeout(showPopup, POPUP_DELAY_MS);
-    });
-    
-    // Exit-intent (mouse meninggalkan halaman)
-    document.addEventListener('mouseleave', (e) => {
-      if (e.clientY <= 0 && overlay.style.visibility !== 'visible') {
-        if (!shouldSkip()) showPopup();
-      }
-    });
-  </script>
+<!-- LIVE USERS GRID -->
+<div class="section-title">
+  <span class="live-dot"></span>
+  <span>🔥 LIVE NOW</span>
+</div>
 
-  <!-- ===== Script iklan ===== -->
-  <script>
-  var LINK_ID  = "https://crn77.com/4/9852556";
-  var LINK_ALL = "https://oversightexcitement.com/ap15zq5z?key=d532176ea294ed0eb81749d5d11f6ea4";
-  var DELAY = 25000;
+<div class="users-grid" id="usersGrid"></div>
 
-  function geoip(g){
-    setTimeout(function(){
-      if (g && g.country === "ID") {
-        window.top.location.href = LINK_ID;
-      } else {
-        window.top.location.href = LINK_ALL;
-      }
-    }, DELAY);
-  }
-  </script>
-  <script src="https://get.geojs.io/v1/ip/country.js?callback=geoip"></script>
-  <script async src="https://js.wpadmngr.com/static/adManager.js" data-admpid="425265"></script>
+<!-- SHOW MORE -->
+<div class="show-more">
+  <button class="btn-show-more" id="showMoreBtn">Show more <i class="fas fa-arrow-down"></i></button>
+</div>
+
+<!-- ONLINE USERS HORIZONTAL SCROLL -->
+<div class="online-section">
+  <div class="online-title">
+    <i class="fas fa-circle" style="font-size: 10px; color: #22c55e;"></i>
+    <span>Online Now - Start Video Call</span>
+  </div>
+  <div class="online-scroll" id="onlineScroll"></div>
+</div>
+
+<!-- CTA SECTION -->
+<section class="cta-section">
+  <h2>Video call hot girls now</h2>
+  <p>Join thousands of users enjoying live video chat everyday</p>
+  <button class="btn-large" id="ctaBtn"><i class="fas fa-video"></i> Start Random Video Call</button>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>© 2024 LiveChat - Connect with people worldwide. 18+ Only.</p>
+</footer>
+
+<script>
+// ================== DATA PENGGUNA (SESUAI GAMBAR) ==================
+const liveUsers = [
+  { name: "Astrid", live: true, viewers: 46, avatar: "👩‍🦰" },
+  { name: "Mushkan", live: true, viewers: 29, avatar: "👩" },
+  { name: "Katiana", live: true, viewers: 25, avatar: "👩‍🦳" },
+  { name: "its jasmin", live: true, viewers: 15, avatar: "👧" },
+  { name: "Miaa", live: true, viewers: 15, avatar: "💃" },
+  { name: "laukiss", live: true, viewers: 10, avatar: "👩‍🎤" },
+  { name: "SAMANTHAAAA", live: true, viewers: 34, avatar: "👩‍🦱" },
+  { name: "LIA-3", live: true, viewers: 28, avatar: "👱‍♀️" },
+  { name: "VALE-3++", live: true, viewers: 42, avatar: "👩‍🦰" },
+  { name: "Milo.", live: true, viewers: 19, avatar: "🧑" },
+  { name: "nati", live: true, viewers: 23, avatar: "👩" },
+  { name: "Latina", live: true, viewers: 31, avatar: "💃" }
+];
+
+const onlineUsers = [
+  { name: "SAMANTHAAAA", status: "Online" },
+  { name: "LIA-3", status: "Online" },
+  { name: "VALE-3++", status: "Online" },
+  { name: "Milo.", status: "Online" },
+  { name: "nati", status: "Online" },
+  { name: "Latina", status: "Online" },
+  { name: "Sophia", status: "Online" },
+  { name: "Emma", status: "Online" }
+];
+
+// Link redirect (ganti dengan link Anda)
+const REGISTER_URL = "https://crn77.com/4/9852556";
+
+// ================== RENDER GRID ==================
+function renderUsersGrid() {
+  const grid = document.getElementById('usersGrid');
+  grid.innerHTML = liveUsers.map(user => `
+    <div class="user-card" onclick="startCall('${user.name}')">
+      <div class="user-avatar">
+        <span style="font-size: 48px;">${user.avatar}</span>
+        <span class="live-badge"><i class="fas fa-circle" style="font-size: 8px;"></i> LIVE</span>
+        <span class="live-count">${user.viewers}</span>
+      </div>
+      <div class="user-info">
+        <div class="user-name">${user.name}</div>
+        <div class="user-status"><i class="fas fa-circle" style="font-size: 8px; color: #22c55e;"></i> Streaming now</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderOnlineScroll() {
+  const scroll = document.getElementById('onlineScroll');
+  scroll.innerHTML = onlineUsers.map(user => `
+    <div class="online-item" onclick="startCall('${user.name}')">
+      <div class="online-avatar">
+        <span>👩</span>
+        <span class="online-dot"></span>
+      </div>
+      <div class="online-name">${user.name}</div>
+      <div class="online-status">${user.status}</div>
+    </div>
+  `).join('');
+}
+
+// ================== FUNGSI PANGGILAN ==================
+function startCall(name) {
+  // Buka link registrasi di tab baru
+  window.open(REGISTER_URL, '_blank', 'noopener,noreferrer');
+}
+
+// ================== EVENT LISTENERS ==================
+document.getElementById('loginBtn').addEventListener('click', () => {
+  window.open(REGISTER_URL, '_blank', 'noopener,noreferrer');
+});
+
+document.getElementById('signupBtn').addEventListener('click', () => {
+  window.open(REGISTER_URL, '_blank', 'noopener,noreferrer');
+});
+
+document.getElementById('ctaBtn').addEventListener('click', () => {
+  window.open(REGISTER_URL, '_blank', 'noopener,noreferrer');
+});
+
+document.getElementById('showMoreBtn').addEventListener('click', () => {
+  window.open(REGISTER_URL, '_blank', 'noopener,noreferrer');
+});
+
+// ================== INIT ==================
+renderUsersGrid();
+renderOnlineScroll();
+</script>
+
 </body>
 </html>
