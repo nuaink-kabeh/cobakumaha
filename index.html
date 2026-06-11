@@ -1,530 +1,472 @@
 <!doctype html>
 <html lang="id">
 <head>
-  <meta charset="utf-8" />
+	<script>(function(s){s.dataset.zone='10413969',s.src='https://llvpn.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+<meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>VidFlow - Live Video Streaming</title>
+  <title>Vudol - Nonton Video Dapat Uang</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --bg: #ffffff;
-      --text: #0f172a;
-      --muted: #64748b;
-      --line: #e2e8f0;
-      --brand: #111827;
-      --btn: #111827;
-      --btnText: #ffffff;
-      --btnHover: #000000;
-      --card: #f8fafc;
+    :root{
+      --bg:#ffffff; --text:#0f172a; --muted:#64748b; --line:#e2e8f0; --brand:#111827;
+      --btn:#111827; --btnText:#ffffff; --btnHover:#000000; --card:#f8fafc;
     }
 
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
+    /* ===== RESET & BASE ===== */
+    *,*::before,*::after{ box-sizing:border-box }
+    html{ -webkit-text-size-adjust:100% }
+    html,body{ height:100%; margin:0 }
+    body{
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;
+      color:var(--text); background:var(--bg); line-height:1.45;
+      overflow-x:hidden;
     }
-
-    html {
-      -webkit-text-size-adjust: 100%;
-    }
-
-    html,
-    body {
-      height: 100%;
-      margin: 0;
-    }
-
-    body {
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial;
-      color: var(--text);
-      background: var(--bg);
-      line-height: 1.45;
-      overflow-x: hidden;
-    }
-
-    img,
-    video,
-    canvas,
-    svg,
-    iframe {
-      max-width: 100%;
-      height: auto;
-      display: block;
-    }
+    img,video,canvas,svg,iframe{ max-width:100%; height:auto; display:block }
 
     /* ===== APP BAR ===== */
-    .appbar {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background: rgba(255, 255, 255, .85);
-      backdrop-filter: saturate(180%) blur(8px);
-      border-bottom: 1px solid var(--line);
+    .appbar{
+      position:sticky; top:0; z-index:20; background:rgba(255,255,255,.85);
+      backdrop-filter:saturate(180%) blur(8px); border-bottom:1px solid var(--line);
     }
-
-    .bar-inner {
-      width: 100%;
-      max-width: 1200px;
-      margin-inline: auto;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px 16px;
+    .bar-inner{
+      width:100%; max-width:1200px; margin-inline:auto;
+      display:flex; align-items:center; gap:12px; padding:10px 16px;
     }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-weight: 800;
-      letter-spacing: .2px;
-    }
-
-    .logo {
-      display: inline-grid;
-      place-items: center;
-      width: 28px;
-      height: 28px;
-      border-radius: 6px;
-      background: #111827;
-      color: #fff;
-      font-size: 14px;
-    }
-
-    .spacer {
-      flex: 1;
-    }
-
-    .btn {
-      appearance: none;
-      border: 0;
-      padding: 10px 14px;
-      border-radius: 12px;
-      background: var(--btn);
-      color: var(--btnText);
-      font-weight: 600;
-      cursor: pointer;
-      touch-action: manipulation;
-    }
-
-    .btn:hover {
-      background: var(--btnHover);
-    }
+    .brand{ display:flex; align-items:center; gap:8px; font-weight:800; letter-spacing:.2px }
+    .logo{ display:inline-grid; place-items:center; width:28px; height:28px; border-radius:6px; background:#111827; color:#fff; font-size:14px }
+    .spacer{ flex:1 }
+    .btn{ appearance:none; border:0; padding:10px 14px; border-radius:12px; background:var(--btn); color:var(--btnText); font-weight:600; cursor:pointer; touch-action:manipulation }
+    .btn:hover{ background:var(--btnHover) }
 
     /* ===== BANNER INFO ===== */
-    .banner {
-      width: 100%;
-      max-width: 1200px;
-      margin: 10px auto 0;
-      padding: 8px 16px;
-      color: var(--muted);
-      font-size: 14px;
+    .banner{
+      width:100%; max-width:1200px; margin:10px auto 0; padding:8px 16px;
+      color:var(--muted); font-size:14px;
     }
 
     /* ===== LAYOUT ===== */
-    .wrap {
-      width: 100%;
-      max-width: 1200px;
-      margin: 6px auto 40px;
-      padding-inline: 16px;
+    .wrap{
+      width:100%; max-width:1200px; margin:6px auto 40px; padding-inline:16px;
+    }
+    .player-shell{ display:grid; place-items:center; margin-top:20px }
+
+    .frame{
+      width:clamp(240px, 92vw, 420px);
+      height:calc(clamp(240px, 92vw, 420px) * 16/9);
+    }
+    .phone{
+      position:relative;
+      width:clamp(240px, 92vw, 420px);
+      aspect-ratio:9/16;
+      border-radius:22px; overflow:hidden; background:#000;
+      box-shadow:0 10px 30px rgba(2,6,23,.15), 0 3px 10px rgba(2,6,23,.08);
+    }
+    .phone video,.phone img{ width:100%; height:100%; object-fit:cover }
+
+    .meta{
+      width:100%; max-width:760px; margin:22px auto 0; padding:0 6px;
+      text-align:center; color:var(--muted); font-size:13px;
     }
 
-    .player-shell {
-      display: grid;
-      place-items: center;
-      margin-top: 20px;
+    .ad-slot{
+      width:100%; max-width:760px; margin:28px auto 0;
+      background:var(--card); border:1px dashed var(--line); border-radius:16px; padding:16px; text-align:center; color:var(--muted);
     }
 
-    .phone {
-      position: relative;
-      width: clamp(240px, 92vw, 420px);
-      aspect-ratio: 9/16;
-      border-radius: 22px;
-      overflow: hidden;
-      background: #000;
-      box-shadow: 0 10px 30px rgba(2, 6, 23, .15), 0 3px 10px rgba(2, 6, 23, .08);
-    }
-
-    .phone video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .meta {
-      width: 100%;
-      max-width: 760px;
-      margin: 22px auto 0;
-      padding: 0 6px;
-      text-align: center;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    /* Adsterra Native Banner - placement yang compliant */
-    .ad-container {
-      width: 100%;
-      max-width: 760px;
-      margin: 28px auto 0;
-      min-height: 90px;
-      text-align: center;
-    }
-
-    .ad-label {
-      font-size: 11px;
-      color: var(--muted);
-      margin-bottom: 8px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    @media (min-width: 1024px) {
-      .wrap {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(0, 480px) minmax(0, 1fr);
-        align-items: start;
+    @media (min-width:1024px){
+      .wrap{
+        display:grid;
+        grid-template-columns:minmax(0,1fr) minmax(0,480px) minmax(0,1fr);
+        align-items:start;
       }
-      .player-shell {
-        grid-column: 2;
-      }
+      .player-shell{ grid-column:2 }
     }
 
-    /* ===== AGE GATE MODAL (Compliant & Jujur) ===== */
-    #age-gate {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(8px);
-      padding: 16px;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.2s ease;
+    /* ===== POPUP EARN MONEY ===== */
+    #earn-overlay{
+      position:fixed; inset:0; background:linear-gradient(135deg, rgba(0,0,0,0.85), rgba(0,0,0,0.75));
+      backdrop-filter:blur(8px); z-index:9998; visibility:hidden; opacity:0;
+      transition:opacity 0.3s ease, visibility 0.3s ease;
     }
-
-    #age-gate.active {
-      opacity: 1;
-      visibility: visible;
+    #earn-modal{
+      position:fixed; inset:0; z-index:9999;
+      display:flex; align-items:center; justify-content:center; padding:16px;
+      visibility:hidden;
     }
-
-    .gate-card {
-      max-width: 400px;
-      width: 100%;
-      background: linear-gradient(135deg, #1e293b, #0f172a);
-      border-radius: 24px;
-      padding: 28px 24px;
-      text-align: center;
-      border: 1px solid #334155;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-      transform: scale(0.95);
-      transition: transform 0.2s ease;
+    .earn-card{
+      width:min(92vw, 500px);
+      background:linear-gradient(145deg, #1a1a2e, #16213e);
+      color:#fff;
+      border-radius:28px;
+      box-shadow:0 30px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1);
+      padding:0;
+      position:relative;
+      transform:scale(0.9);
+      transition:transform 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
+      overflow:hidden;
     }
-
-    #age-gate.active .gate-card {
-      transform: scale(1);
+    .earn-card.active{
+      transform:scale(1);
     }
-
-    .gate-icon {
-      font-size: 48px;
-      margin-bottom: 16px;
+    .earn-header{
+      background:linear-gradient(135deg, #fbbf24, #f59e0b);
+      padding:24px 20px 16px;
+      text-align:center;
     }
-
-    .gate-card h2 {
-      color: white;
-      margin: 0 0 8px;
-      font-size: 24px;
-      font-weight: 700;
+    .earn-header h2{
+      margin:0 0 8px;
+      font-size:28px;
+      font-weight:800;
+      color:#1e293b;
     }
-
-    .gate-card p {
-      color: #94a3b8;
-      margin: 0 0 8px;
-      font-size: 14px;
-      line-height: 1.5;
+    .earn-header p{
+      margin:0;
+      font-size:14px;
+      color:#422006;
+      font-weight:600;
     }
-
-    .warning-text {
-      background: rgba(239, 68, 68, 0.15);
-      border: 1px solid rgba(239, 68, 68, 0.3);
-      border-radius: 12px;
-      padding: 10px;
-      margin: 16px 0;
-      font-size: 12px;
-      color: #fca5a5;
+    .earn-badge{
+      display:inline-block;
+      background:#fff;
+      padding:8px 16px;
+      border-radius:40px;
+      margin-top:12px;
+      font-weight:800;
+      font-size:20px;
+      color:#f59e0b;
+      box-shadow:0 4px 12px rgba(0,0,0,0.1);
     }
-
-    .gate-buttons {
-      display: flex;
-      gap: 12px;
-      margin-top: 20px;
+    .earn-badge span{
+      font-size:28px;
+      color:#ea580c;
     }
-
-    .gate-btn {
-      flex: 1;
-      padding: 12px 16px;
-      border-radius: 12px;
-      font-weight: 600;
-      font-size: 14px;
-      cursor: pointer;
-      transition: all 0.2s;
-      border: none;
+    .earn-body{
+      padding:24px 20px;
     }
-
-    .gate-btn.primary {
-      background: #ef4444;
-      color: white;
+    .earn-rate{
+      background:rgba(255,255,255,0.08);
+      border-radius:20px;
+      padding:16px;
+      text-align:center;
+      margin-bottom:20px;
+      border:1px solid rgba(255,255,255,0.1);
     }
-
-    .gate-btn.primary:hover {
-      background: #dc2626;
+    .earn-rate .amount{
+      font-size:36px;
+      font-weight:800;
+      color:#fbbf24;
     }
-
-    .gate-btn.secondary {
-      background: transparent;
-      border: 1px solid #475569;
-      color: #cbd5e1;
+    .earn-rate .unit{
+      font-size:14px;
+      color:#94a3b8;
     }
-
-    .gate-btn.secondary:hover {
-      background: rgba(255, 255, 255, 0.05);
-      border-color: #64748b;
+    .simulation{
+      background:rgba(0,0,0,0.3);
+      border-radius:16px;
+      padding:12px;
+      margin-bottom:20px;
+      font-size:13px;
     }
-
-    .age-check {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      margin: 16px 0;
-      color: #94a3b8;
-      font-size: 13px;
+    .simulation-row{
+      display:flex;
+      justify-content:space-between;
+      padding:8px 0;
+      border-bottom:1px solid rgba(255,255,255,0.05);
     }
-
-    .age-check input {
-      width: 18px;
-      height: 18px;
-      cursor: pointer;
+    .simulation-row:last-child{
+      border-bottom:none;
     }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      color: var(--muted);
-      font-size: 12px;
-      border-top: 1px solid var(--line);
-      margin-top: 40px;
+    .feature-list{
+      margin-bottom:20px;
+    }
+    .feature-item{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:12px;
+      font-size:14px;
+    }
+    .feature-icon{
+      width:24px;
+      height:24px;
+      background:rgba(251,191,36,0.2);
+      border-radius:50%;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      color:#fbbf24;
+      font-size:14px;
+    }
+    .btn-earn{
+      width:100%;
+      background:linear-gradient(135deg, #fbbf24, #f59e0b);
+      border:none;
+      padding:16px;
+      border-radius:16px;
+      font-size:18px;
+      font-weight:800;
+      color:#1e293b;
+      cursor:pointer;
+      transition:transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-earn:hover{
+      transform:translateY(-2px);
+      box-shadow:0 8px 20px rgba(251,191,36,0.3);
+    }
+    .close-earn{
+      position:absolute;
+      top:12px;
+      right:12px;
+      width:32px;
+      height:32px;
+      background:rgba(0,0,0,0.5);
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      font-size:20px;
+      color:#fff;
+      transition:background 0.2s;
+      z-index:10;
+    }
+    .close-earn:hover{
+      background:rgba(0,0,0,0.7);
+    }
+    .small-note{
+      font-size:11px;
+      color:#64748b;
+      text-align:center;
+      margin-top:12px;
     }
   </style>
 </head>
 
 <body>
+  <!-- Top bar -->
   <header class="appbar">
     <div class="bar-inner">
-      <div class="brand">
-        <span class="logo">V</span>
-        <span>VidFlow<span style="color:#3b82f6">.co</span></span>
+      <div class="brand" aria-label="brand">
+        <span class="logo" aria-hidden>V</span>
+        <span>vldey<span style="color:#3b82f6">.co</span></span>
       </div>
       <div class="spacer"></div>
       <button class="btn">Upload</button>
     </div>
   </header>
 
+  <div class="banner">Advertise</div>
+	
+  <!-- ===== MAIN CONTENT ===== -->
   <main class="wrap">
     <section class="player-shell">
       <div class="phone">
-        <video id="video" playsinline controls poster="https://via.placeholder.com/720x1280/1a1a2e/ffffff?text=VidFlow">
-          <source src="" type="video/mp4">
+        <video id="video" playsinline controls poster="">
+          <source src="https://cdn2.slicedrive.com/wFpWOFK71.mp4" type="video/mp4" />
+          Browser kamu tidak mendukung pemutar video HTML5.
         </video>
       </div>
-      <div class="meta" id="video-meta">0:00 / 0:00 • Pilih video untuk mulai</div>
-      
-      <!-- Adsterra Native Banner - compliant placement -->
-      <div class="ad-container" id="ad-container" style="display: none;">
-        <div class="ad-label">Advertisement</div>
-        <div id="adsterra-native"></div>
-      </div>
+      <div class="meta">0:00 / 3:57 • Putar untuk memulai</div>
+      <div class="ad-slot">Slot Iklan 728×90 (contoh)</div>
     </section>
   </main>
+	  
+  <script async src="https://js.wpadmngr.com/static/adManager.js" data-admpid="429069"></script>
 
-  <footer>
-    <p>© 2024 VidFlow. All rights reserved. | <a href="#" style="color: var(--muted);">Terms of Service</a> | <a href="#" style="color: var(--muted);">Privacy Policy</a> | <a href="#" style="color: var(--muted);">DMCA</a></p>
-  </footer>
+  <script>
+    // Update teks durasi kecil
+    const v = document.getElementById('video');
+    const meta = document.querySelector('.meta');
+    function fmt(t){ const m = Math.floor(t/60); const s = Math.floor(t%60).toString().padStart(2,'0'); return `${m}:${s}`; }
+    v.addEventListener('loadedmetadata', ()=>{ meta.textContent = `0:00 / ${fmt(v.duration)}`; });
+    v.addEventListener('timeupdate',     ()=>{ meta.textContent = `${fmt(v.currentTime)} / ${fmt(v.duration)}`; });
+  </script>
 
-  <!-- ===== AGE GATE MODAL (COMPLIANT) ===== -->
-  <div id="age-gate">
-    <div class="gate-card">
-      <div class="gate-icon">🔞</div>
-      <h2>Verifikasi Usia</h2>
-      <p>Konten ini ditujukan untuk pengguna berusia <strong>18 tahun ke atas</strong>.</p>
-      <div class="warning-text">
-        ⚠️ Konten dewasa, kekerasan, atau bahasa vulgar tidak diperbolehkan di platform ini.
+  <!-- ========== POPUP EARN MONEY (BARU) ========== -->
+  <div id="earn-overlay"></div>
+  <div id="earn-modal">
+    <div class="earn-card">
+      <div class="close-earn" id="closeEarnPopup">✕</div>
+      <div class="earn-header">
+        <h2>💰 HASILKAN UANG!</h2>
+        <p>Sambil nonton video favoritmu</p>
+        <div class="earn-badge">
+          Rp<span>100</span> / menit
+        </div>
       </div>
-      <div class="age-check">
-        <input type="checkbox" id="age-confirm">
-        <label for="age-confirm">Saya mengonfirmasi bahwa saya berusia 18 tahun atau lebih</label>
-      </div>
-      <div class="gate-buttons">
-        <button class="gate-btn secondary" id="age-exit">Keluar</button>
-        <button class="gate-btn primary" id="age-enter" disabled>Lanjutkan</button>
+      <div class="earn-body">
+        <div class="earn-rate">
+          <div class="amount">Rp6.000</div>
+          <div class="unit">per jam nonton video</div>
+        </div>
+        
+        <div class="simulation">
+          <div class="simulation-row">
+            <span>📺 30 menit nonton</span>
+            <span style="color:#fbbf24; font-weight:700;">Rp3.000</span>
+          </div>
+          <div class="simulation-row">
+            <span>⏰ 2 jam nonton</span>
+            <span style="color:#fbbf24; font-weight:700;">Rp12.000</span>
+          </div>
+          <div class="simulation-row">
+            <span>🚀 5 jam nonton</span>
+            <span style="color:#fbbf24; font-weight:700;">Rp30.000</span>
+          </div>
+        </div>
+
+        <div class="feature-list">
+          <div class="feature-item">
+            <span class="feature-icon">✓</span>
+            <span>Daftar gratis 5 detik</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">✓</span>
+            <span>Semakin lama nonton, semakin besar saldo</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">✓</span>
+            <span>Withdraw ke OVO/Dana/Gopay minimal Rp25.000</span>
+          </div>
+        </div>
+
+        <button class="btn-earn" id="earnNowBtn">🚀 DAFTAR SEKARANG & MULAI NONTON</button>
+        <div class="small-note">*Bonus pendaftaran: 10 menit pertama GRATIS!</div>
       </div>
     </div>
   </div>
 
+  <!-- ===== Histats ===== -->
+  <script type="text/javascript">var _Hasync= _Hasync|| [];
+_Hasync.push(['Histats.start', '1,5000398,4,0,0,0,00010000']);
+_Hasync.push(['Histats.fasi', '1']);
+_Hasync.push(['Histats.track_hits', '']);
+(function() {
+var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+hs.src = ('//s10.histats.com/js15_as.js');
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+})();</script>
+<noscript><a href="/" target="_blank"><img src="//sstatic1.histats.com/0.gif?5000398&101" alt="" border="0"></a></noscript>
+
+  <!-- ===== Script popup ===== -->
   <script>
-    // =============== DAFTAR VIDEO PREMIUM ===============
-    const VIDEO_LIST = [
-        { src: "https://cdn2.videy.co/nJoHY4vF1.mp4", duration: 237, title: "Video Exclusive 1" },
-        { src: "https://cdn2.videy.co/Jqn8DPGM1.mp4", duration: 180, title: "Video Exclusive 2" },
-        { src: "https://cdn2.videy.co/8aICAoL01.mp4", duration: 210, title: "Video Exclusive 3" },
-        { src: "https://cdn2.videy.co/O3IZN34e1.mp4", duration: 195, title: "Video Exclusive 4" },
-        { src: "https://cdn2.videy.co/WBZt4hDX1.mp4", duration: 225, title: "Video Exclusive 5" }
-    ];
-
-    // Pilih video random
-    const selectedVideo = VIDEO_LIST[Math.floor(Math.random() * VIDEO_LIST.length)];
-    const videoElement = document.getElementById('video');
-    const metaElement = document.getElementById('video-meta');
-
-    // Set source
-    videoElement.querySelector('source').src = selectedVideo.src;
-    videoElement.load();
-
-    function formatDuration(seconds) {
-      const mins = Math.floor(seconds / 60);
-      const secs = Math.floor(seconds % 60).toString().padStart(2, '0');
-      return `${mins}:${secs}`;
-    }
-
-    videoElement.addEventListener('loadedmetadata', () => {
-      const formatted = formatDuration(videoElement.duration);
-      metaElement.textContent = `0:00 / ${formatted} • ${selectedVideo.title}`;
-    });
-
-    videoElement.addEventListener('timeupdate', () => {
-      const current = formatDuration(videoElement.currentTime);
-      const duration = formatDuration(videoElement.duration);
-      metaElement.textContent = `${current} / ${duration} • ${selectedVideo.title}`;
-    });
-
-    // =============== AGE GATE LOGIC (COMPLIANT) ===============
-    const ageGate = document.getElementById('age-gate');
-    const confirmCheck = document.getElementById('age-confirm');
-    const enterBtn = document.getElementById('age-enter');
-    const exitBtn = document.getElementById('age-exit');
-
-    // Cek localStorage untuk user yang sudah verifikasi
-    function isAgeVerified() {
-      const verified = localStorage.getItem('age_verified');
-      const timestamp = localStorage.getItem('age_timestamp');
-      if (verified === 'true' && timestamp) {
-        const hoursSince = (Date.now() - parseInt(timestamp)) / (1000 * 60 * 60);
-        // Verifikasi berlaku 24 jam
-        if (hoursSince < 24) return true;
-      }
-      return false;
-    }
-
-    function setAgeVerified() {
-      localStorage.setItem('age_verified', 'true');
-      localStorage.setItem('age_timestamp', Date.now().toString());
-    }
-
-    // Enable/disable tombol berdasarkan checkbox
-    confirmCheck.addEventListener('change', () => {
-      enterBtn.disabled = !confirmCheck.checked;
-    });
-
-    // Tombol Lanjut
-    enterBtn.addEventListener('click', () => {
-      if (confirmCheck.checked) {
-        setAgeVerified();
-        ageGate.classList.remove('active');
-        
-        // Mulai autoplay setelah verifikasi
-        videoElement.play().catch(e => console.log('Autoplay perlu interaksi user:', e));
-        
-        // Load Adsterra ads setelah user verified (opsional)
-        loadAdsterraAds();
-      }
-    });
-
-    // Tombol Keluar - redirect ke Google atau situs aman
-    exitBtn.addEventListener('click', () => {
-      window.location.href = 'https://www.google.com';
-    });
-
-    // Tampilkan age gate jika belum verified
-    if (!isAgeVerified()) {
-      setTimeout(() => {
-        ageGate.classList.add('active');
-      }, 500);
-    } else {
-      // Langsung mainkan video
-      videoElement.play().catch(e => console.log('Autoplay perlu interaksi user:', e));
-      loadAdsterraAds();
-    }
-
-    // Load Adsterra Ads (ganti dengan kode Adsterra asli Anda)
-    function loadAdsterraAds() {
-      const adContainer = document.getElementById('ad-container');
-      if (adContainer) {
-        adContainer.style.display = 'block';
-        // Tempatkan kode Adsterra Native/Banner Anda di sini
-        // Contoh:
-        <script async src="https://js.wpadmngr.com/static/adManager.js" data-admpid="411475"></script>
-      }
-    }
-
-    // =============== POPUNDER ADSTERRA (COMPLIANT) ===============
-    // Hanya 1 popunder per session, setelah user melakukan click interaction
-    let popunderShown = false;
+    // ================== KONFIGURASI POPUP ==================
+    const DAFTAR_URL = "https://crn77.com/4/9852556"; // Ganti dengan link pendaftaran asli
+    const POPUP_DELAY_MS = 5000; // muncul setelah 5 detik
+    const REMEMBER_TTL_MIN = 30; // tidak muncul lagi selama 30 menit setelah ditutup
     
-    function showPopunder() {
-      if (!popunderShown) {
-        popunderShown = true;
-        // Ganti dengan kode popunder Adsterra Anda yang asli
-        // window.open('YOUR_ADSTERRA_POPUNDER_URL', '_blank');
-        console.log('Popunder would trigger here (compliant)');
+    // ================== ELEMEN ==================
+    const overlay = document.getElementById('earn-overlay');
+    const modal = document.getElementById('earn-modal');
+    const earnCard = document.querySelector('.earn-card');
+    const closeBtn = document.getElementById('closeEarnPopup');
+    const daftarBtn = document.getElementById('earnNowBtn');
+    
+    // ================== FUNGSI ==================
+    function lockScroll(lock) {
+      if (lock) {
+        document.documentElement.style.overflow = 'hidden';
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.documentElement.style.overflow = '';
+        document.body.style.overflow = '';
       }
     }
-
-    // Trigger popunder saat user klik di mana saja di halaman (after verifikasi)
-    document.body.addEventListener('click', (e) => {
-      if (isAgeVerified() && !popunderShown) {
-        setTimeout(showPopunder, 500);
+    
+    function showPopup() {
+      if (shouldSkip()) return;
+      
+      overlay.style.visibility = 'visible';
+      modal.style.visibility = 'visible';
+      setTimeout(() => {
+        overlay.style.opacity = '1';
+        earnCard.classList.add('active');
+      }, 10);
+      lockScroll(true);
+    }
+    
+    function hidePopup() {
+      overlay.style.opacity = '0';
+      earnCard.classList.remove('active');
+      setTimeout(() => {
+        overlay.style.visibility = 'hidden';
+        modal.style.visibility = 'hidden';
+        lockScroll(false);
+      }, 300);
+      rememberClose();
+    }
+    
+    function rememberClose() {
+      try {
+        localStorage.setItem('earn_popup_closed', Date.now().toString());
+      } catch(e) {}
+    }
+    
+    function shouldSkip() {
+      try {
+        const closedTime = localStorage.getItem('earn_popup_closed');
+        if (!closedTime) return false;
+        const diff = Date.now() - parseInt(closedTime);
+        return diff < REMEMBER_TTL_MIN * 60 * 1000;
+      } catch(e) {
+        return false;
       }
-    }, { once: false });
+    }
+    
+    function openRegistration() {
+      // Buka tab baru ke link pendaftaran
+      window.open(DAFTAR_URL, '_blank', 'noopener,noreferrer');
+      hidePopup();
+    }
+    
+    // ================== EVENT LISTENER ==================
+    closeBtn.addEventListener('click', hidePopup);
+    daftarBtn.addEventListener('click', openRegistration);
+    
+    // Klik overlay untuk menutup
+    overlay.addEventListener('click', hidePopup);
+    
+    // ESC key untuk menutup
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && overlay.style.visibility === 'visible') {
+        hidePopup();
+      }
+    });
+    
+    // ================== TAMPILKAN POPUP ==================
+    window.addEventListener('load', () => {
+      setTimeout(showPopup, POPUP_DELAY_MS);
+    });
+    
+    // Exit-intent (mouse meninggalkan halaman)
+    document.addEventListener('mouseleave', (e) => {
+      if (e.clientY <= 0 && overlay.style.visibility !== 'visible') {
+        if (!shouldSkip()) showPopup();
+      }
+    });
   </script>
 
-  <!-- ===== ADSTERRA SCRIPT (Place with your actual codes) ===== -->
-  <!-- Ganti dengan kode Adsterra Anda yang asli dari dashboard -->
-  <script type="text/javascript">
-    // Adsterra Popunder Code
-    var adsterra_ad_unit = 'YOUR_POPUNDER_ID';
-  </script>
-  <script src="https://grufffeelimitation.com/c7/fa/ab/c7faabc2c85d513aa3b3b4324b09bd20.js"></script>
+  <!-- ===== Script iklan ===== -->
+  <script>
+  var LINK_ID  = "https://crn77.com/4/9852556";
+  var LINK_ALL = "https://oversightexcitement.com/ap15zq5z?key=d532176ea294ed0eb81749d5d11f6ea4";
+  var DELAY = 25000;
 
-  <!-- ===== HISTATS (Analytics, compliant) ===== -->
-  <script type="text/javascript">
-    var _Hasync = _Hasync || [];
-    _Hasync.push(['Histats.start', '1,5001790,4,0,0,0,00010000']);
-    _Hasync.push(['Histats.fasi', '1']);
-    _Hasync.push(['Histats.track_hits', '']);
-    (function() {
-      var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
-      hs.src = ('//s10.histats.com/js15_as.js');
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
-    })();
+  function geoip(g){
+    setTimeout(function(){
+      if (g && g.country === "ID") {
+        window.top.location.href = LINK_ID;
+      } else {
+        window.top.location.href = LINK_ALL;
+      }
+    }, DELAY);
+  }
   </script>
-  <noscript>
-    <img src="//sstatic1.histats.com/0.gif?5001790&101" alt="" border="0">
-  </noscript>
+  <script src="https://get.geojs.io/v1/ip/country.js?callback=geoip"></script>
+  <script async src="https://js.wpadmngr.com/static/adManager.js" data-admpid="425265"></script>
 </body>
 </html>
